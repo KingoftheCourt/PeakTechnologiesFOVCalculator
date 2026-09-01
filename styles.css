@@ -1,0 +1,393 @@
+/* ------------------------------------------------------------------ tokens */
+:root {
+  --peak:        #A4C03C;   /* Peak Technologies green, from the brief */
+  --peak-deep:   #63771C;   /* darkened for text that must stay legible */
+  --peak-wash:   #F1F5E2;
+  --ink:         #1D2115;
+  --ink-soft:    #5F6555;
+  --ink-mid:     #3B4132;
+  --paper:       #FFFFFF;
+  --field:       #F3F4EF;
+  --rule:        #DCDFD1;
+  --alarm:       #A33A22;
+
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  --gap: 1.5rem;
+  --radius: 6px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--field);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.hidden { display: none !important; }
+.mono { font-variant-numeric: tabular-nums; }
+
+/* ---------------------------------------------------------------- masthead */
+.masthead {
+  background: var(--paper);
+  border-bottom: 3px solid var(--peak);
+}
+
+.masthead__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.95rem;
+}
+
+.wordmark {
+  width: 12px;
+  height: 34px;
+  flex: none;
+  background: var(--peak);
+  border-radius: 2px;
+}
+
+.masthead h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.masthead__sub {
+  margin: 0.1rem 0 0;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.ghost-btn {
+  margin-left: auto;
+  font: inherit;
+  font-size: 0.86rem;
+  padding: 0.5rem 0.95rem;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.ghost-btn:hover { border-color: var(--peak); background: var(--peak-wash); }
+.ghost-btn:active { background: var(--peak); }
+
+/* ------------------------------------------------------------------- shell */
+.shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--gap) 1.5rem;
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: var(--gap);
+  align-items: start;
+}
+
+.shell--tools {
+  display: block;
+  padding-top: 0;
+}
+
+/* ------------------------------------------------------------------- rail */
+.rail {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.35rem;
+  position: sticky;
+  top: var(--gap);
+}
+
+.field + .field { margin-top: 1.35rem; }
+
+.field label {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+input[type="number"],
+select {
+  font: inherit;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  font-variant-numeric: tabular-nums;
+}
+
+select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%),
+                    linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
+  background-position: right 0.95rem center, right 0.68rem center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2rem;
+}
+
+input[type="number"]:focus-visible,
+select:focus-visible,
+.ghost-btn:focus-visible,
+summary:focus-visible,
+input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--peak-deep);
+  outline-offset: 1px;
+}
+
+.combo { display: flex; }
+.combo > :first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.combo__unit,
+.combo__select {
+  flex: none;
+  width: auto;
+  min-width: 4.4rem;
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: var(--field);
+}
+.combo__unit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.75rem;
+  border: 1px solid var(--rule);
+  border-left: 0;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+#lensCustom { margin-top: 0.5rem; }
+
+.spec {
+  margin: 0.42rem 0 0;
+  font-size: 0.79rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.alert {
+  margin: 1.3rem 0 0;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.83rem;
+  color: var(--alarm);
+  background: #FBF0ED;
+  border-left: 3px solid var(--alarm);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* ----------------------------------------------------------------- results */
+.results { display: grid; gap: var(--gap); }
+
+.stage {
+  margin: 0;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+#viewport svg { display: block; width: 100%; height: auto; }
+
+/* readouts */
+.readouts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.readout {
+  background: var(--paper);
+  padding: 1.05rem 1.15rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.readout__key {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.readout__value {
+  margin-top: 0.3rem;
+  font-size: 1.85rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The imperial reading is the same measurement in other units, so it is
+   set as a second value rather than a caption. */
+.readout__alt {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-mid);
+  font-size: 1.08rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.readout__alt .unit {
+  margin-left: 0.16rem;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.readout__alt .sep {
+  margin: 0 0.42rem;
+  color: var(--rule);
+}
+
+/* The pixels-per-module line is a verdict, not a measurement, so it stays
+   quiet -- but it keeps the same divider so all three cards line up. */
+.readout__note {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+}
+
+.readout--ppm { border-top: 3px solid var(--rule); }
+.readout--ppm.is-good { border-top-color: var(--peak); }
+.readout--ppm.is-low  { border-top-color: var(--alarm); }
+.readout--ppm.is-low .readout__note { color: var(--alarm); }
+
+/* spec sheet */
+.specsheet {
+  margin: 0;
+  padding: 1.15rem 1.35rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(122px, 1fr));
+  gap: 0.95rem 1.35rem;
+}
+
+.specsheet div { min-width: 0; }
+
+.specsheet dt {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.specsheet dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------ tools */
+.tools {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.tools summary {
+  padding: 0.85rem 1.25rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.tools__body {
+  padding: 0 1.25rem 1.35rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.tools__pair { max-width: 320px; }
+
+.conv-out {
+  display: block;
+  margin-top: 0.75rem;
+  padding: 0.7rem 0.85rem;
+  background: var(--peak-wash);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.tools__table { overflow-x: auto; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+caption {
+  text-align: left;
+  font-size: 0.79rem;
+  color: var(--ink-soft);
+  padding-bottom: 0.45rem;
+}
+
+th, td {
+  text-align: right;
+  padding: 0.3rem 0.7rem;
+  border-bottom: 1px solid var(--rule);
+}
+th { font-weight: 500; color: var(--ink-soft); }
+thead th { border-bottom: 1px solid var(--ink-soft); }
+tbody tr:last-child td { border-bottom: 0; }
+
+.colophon {
+  margin: 1.1rem 0 2.5rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 880px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  .rail { position: static; }
+  .readouts { grid-template-columns: minmax(0, 1fr); }
+  .tools__body { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+@media print {
+  .masthead { border-bottom-width: 2px; }
+  .ghost-btn, .tools, .colophon { display: none; }
+  .shell { display: block; }
+  .rail, .stage, .readouts, .specsheet { break-inside: avoid; margin-bottom: 1rem; }
+  body { background: #fff; }
+}

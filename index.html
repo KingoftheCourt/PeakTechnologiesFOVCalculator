@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field of View Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead__inner">
+    <span class="wordmark" aria-hidden="true"></span>
+    <div>
+      <h1>Field of view calculator</h1>
+      <p class="masthead__sub">Peak Technologies</p>
+    </div>
+    <button type="button" class="ghost-btn" id="copyBtn">Copy results</button>
+  </div>
+</header>
+
+<main class="shell">
+
+  <!-- ------------------------------------------------------ inputs -->
+  <section class="rail" aria-label="Inputs">
+
+    <div class="field">
+      <label for="model">Camera</label>
+      <select id="model"></select>
+      <p class="spec" id="modelSpec">&nbsp;</p>
+    </div>
+
+    <div class="field">
+      <label for="lens">Lens focal length</label>
+      <div class="combo">
+        <select id="lens"></select>
+        <span class="combo__unit">mm</span>
+      </div>
+      <input type="number" id="lensCustom" class="hidden" min="0.1" step="0.1"
+             placeholder="Focal length in mm" aria-label="Custom focal length in mm">
+    </div>
+
+    <div class="field">
+      <label for="distance">Working distance</label>
+      <div class="combo">
+        <input type="number" id="distance" min="0" step="1" value="200">
+        <select id="distanceUnit" class="combo__select" aria-label="Working distance unit">
+          <option value="mm" selected>mm</option>
+          <option value="inch">in</option>
+          <option value="feet">ft</option>
+        </select>
+      </div>
+      <p class="spec" id="distanceEcho">&nbsp;</p>
+    </div>
+
+    <div class="field">
+      <label for="module">Code module size</label>
+      <div class="combo">
+        <input type="number" id="module" min="0" step="0.5" value="12">
+        <select id="moduleUnit" class="combo__select" aria-label="Module size unit">
+          <option value="mil" selected>mil</option>
+          <option value="inch">in</option>
+          <option value="mm">mm</option>
+        </select>
+      </div>
+      <p class="spec">Narrowest bar or cell of the code. 12&nbsp;mil is the common carton label.</p>
+    </div>
+
+    <p class="alert hidden" id="alert" role="alert"></p>
+  </section>
+
+  <!-- ----------------------------------------------------- results -->
+  <section class="results" aria-label="Results" aria-live="polite">
+
+    <figure class="stage">
+      <div id="viewport"></div>
+    </figure>
+
+    <div class="readouts">
+      <div class="readout">
+        <span class="readout__key">Field of view, width</span>
+        <span class="readout__value" id="fovX">&mdash;</span>
+        <span class="readout__alt" id="fovXAlt">&nbsp;</span>
+      </div>
+      <div class="readout">
+        <span class="readout__key">Field of view, height</span>
+        <span class="readout__value" id="fovY">&mdash;</span>
+        <span class="readout__alt" id="fovYAlt">&nbsp;</span>
+      </div>
+      <div class="readout readout--ppm" id="ppmCard">
+        <span class="readout__key">Pixels per module</span>
+        <span class="readout__value" id="ppm">&mdash;</span>
+        <span class="readout__note" id="ppmAlt">&nbsp;</span>
+      </div>
+    </div>
+
+    <dl class="specsheet" id="specsheet"></dl>
+  </section>
+</main>
+
+<!-- ------------------------------------------------------ converters -->
+<section class="shell shell--tools">
+  <details class="tools">
+    <summary>Unit converters</summary>
+    <div class="tools__body">
+      <div class="tools__pair">
+        <div class="field">
+          <label for="convValue">Convert a length</label>
+          <div class="combo">
+            <input type="number" id="convValue" value="647" step="any">
+            <select id="convUnit" class="combo__select" aria-label="Unit to convert from">
+              <option value="mm" selected>mm</option>
+              <option value="inch">in</option>
+              <option value="feet">ft</option>
+            </select>
+          </div>
+        </div>
+        <output class="conv-out" id="convOut">&nbsp;</output>
+      </div>
+
+      <div class="tools__table">
+        <table id="refTable">
+          <caption>Feet to inches and millimetres</caption>
+          <thead><tr><th scope="col">Feet</th><th scope="col">Inches</th><th scope="col">mm</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+  <p class="colophon">
+    Matches <span class="mono">GTX_and_CV60_FOV_Calculator_5.xlsx</span> cell for cell.
+  </p>
+</section>
+
+<script src="calc-data.js"></script>
+<script src="calculator.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
