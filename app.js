@@ -183,7 +183,7 @@ function render(d) {
   const rows = [
     ["Sensor width", `${c.sensor_x_mm} mm`],
     ["Sensor height", `${c.sensor_y_mm} mm`],
-    ["Resolution", `${c.pixels_x} \u00d7 ${c.pixels_y}`],
+    ["Resolution", `${c.pixels_x} \u00d7 ${c.pixels_y} px`],
     ["Lens", `${num(d.inputs.focal_length_mm, 1)} mm`],
     ["Working distance", `${num(d.inputs.working_distance_mm, 1)} mm`],
     ["Module size", `${num(d.inputs.mil_size_mil, 1)} mil`],
